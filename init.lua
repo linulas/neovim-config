@@ -10,6 +10,8 @@ bootstrap.parse_config_file_and_set_environment_variables(vim.fn.stdpath "config
 
 vim.api.nvim_set_option_value("clipboard", "unnamed", {})
 
+o.conceallevel = 1
+
 o.laststatus = 3
 o.showmode = false
 

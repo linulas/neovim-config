@@ -3,6 +3,11 @@ local map = vim.keymap.set
 -- general
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("i", "[", "[]<Left>", { noremap = true, silent = true })
+map("i", "{", "{}<Left>", { noremap = true, silent = true })
+map("i", "(", "()<Left>", { noremap = true, silent = true })
+map("i", '"', '""<Left>', { noremap = true, silent = true })
+map("i", "'", "''<Left>", { noremap = true, silent = true })
 
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-e>", "<End>", { desc = "move end of line" })
@@ -143,6 +148,16 @@ map("n", "<leader>mg", "<cmd>Flote global<CR>", { desc = "Global notes" })
 map("n", "<leader>mn", "<cmd>Flote manage<CR>", { desc = "Manage notes" })
 map("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Start Markdown preview" })
 map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<CR>", { desc = "Stop Markdown preview" })
+
+map("n", "<leader>fn", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Find notes" })
+map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Open current note in Obsidian" })
+map("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "Search references to the current buffer" })
+map("n", "<leader>of", "<cmd>ObsidianTags<CR>", { desc = "Search obsidian tags" })
+map("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search for (or create) notes in vault" })
+map("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "Collect all links within the current buffer" })
+map("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Pick a obisidian template" })
+map("v", "<leader>ol", ":'<,'>ObsidianLinkNew<CR>", { desc = "Create a new note and link to it" })
+map("v", "<leader>oe", ":'<,'>ObsidianExtractNote<CR>", { desc = "Extract text into new note and link to it" })
 
 -- debugging
 map("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", { desc = "Toggle breakpoint" })

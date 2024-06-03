@@ -9,6 +9,8 @@ local options = {
     "javascript",
     "lua",
     "luadoc",
+    "markdown",
+    "markdown_inline",
     "printf",
     "svelte",
     "vim",
