@@ -5,6 +5,7 @@ local default_settings = {
   ENABLE_PLUGIN_DAP = true,
   ENABLE_PLUGIN_OBSIDIAN = false,
   LLDB_PATH = "/usr/local/opt/llvm/bin/lldb-vscode",
+  OBSIDIAN_VAULT_PATH = "~/Documents"
 }
 
 --- Parses a configuration file and sets environment varaiables accordingly.

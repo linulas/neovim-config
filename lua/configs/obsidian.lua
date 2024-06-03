@@ -11,7 +11,7 @@ M.init = function()
     workspaces = {
       {
         name = "personal",
-        path = "~/Dokument/Anteckningar",
+        path = vim.env.OBSIDIAN_VAULT_PATH,
       },
     },
 
