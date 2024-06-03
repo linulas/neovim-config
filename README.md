@@ -36,6 +36,7 @@
     - [flote.nvim](https://github.com/JellyApple102/flote.nvim) 
     - [nvim-dap](https://github.com/mfussenegger/nvim-dap) 
     - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) 
+    - [obsidian.nvim](https://github.com/epwalsh/obsidian.nvim) 
     
 
 ## Pre-requisites
