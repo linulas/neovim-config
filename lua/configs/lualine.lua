@@ -47,9 +47,9 @@ local options = {
     },
   },
   sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = {
+    -- lualine_a = { "mode" },
+    lualine_a = { "branch", "diff", "diagnostics" },
+    lualine_b = {
       -- {
       --   "buffers",
       --   symbols = {
@@ -69,6 +69,7 @@ local options = {
         padding = { left = 0, right = 1 },
       },
     },
+    lualine_c = {},
     lualine_x = {
       get_workspace_name,
     },
