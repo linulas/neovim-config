@@ -73,7 +73,9 @@ map("n", "[d", function()
 end, { desc = "Previous diagnostic" })
 
 -- buffer
-map("n", "<Tab>", "<cmd>b#<CR>", { desc = "Go to previous buffer" })
+map("n", "\\", "<cmd>b#<CR>", { desc = "Go to alternate buffer" })
+map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Go to next buffer" })
+map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Go to previous buffer" })
 map("n", "<leader>cb", "<cmd>%bd|e#|bd#<CR>", { desc = "Close all except active buffer" })
 map("n", "<leader>x", "<cmd>bd<CR>", { desc = "Close current buffer" })
 map("n", "f", ":HopWord<cr>", { desc = "Hop word on entire buffer" })
