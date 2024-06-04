@@ -160,16 +160,10 @@ return {
   -- UI {{{
   {
     "Mofiqul/dracula.nvim",
-    -- "rebelot/kanagawa.nvim",
-    -- "folke/tokyonight.nvim",
-    -- "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd [[colorscheme dracula]]
-      -- vim.cmd [[colorscheme cyberdream]]
-      -- vim.cmd([[colorscheme tokyonight]])
-      -- vim.cmd([[colorscheme kanagawa]])
     end,
   },
 
@@ -221,6 +215,11 @@ return {
   },
 
   { "folke/zen-mode.nvim", cmd = "ZenMode" },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    cmd = "ColorizerToggle",
+  },
   -- }}}
 
   -- AI {{{
@@ -282,8 +281,6 @@ return {
   },
   {
     "epwalsh/obsidian.nvim",
-    -- version = "*",
-    -- lazy = true,
     ft = "markdown",
     cond = vim.env.ENABLE_PLUGIN_OBSIDIAN == "true",
     cmd = {
@@ -294,13 +291,6 @@ return {
       "ObsidianSearch",
       "ObsidianTemplate",
     },
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-    --   "BufReadPre path/to/my-vault/**.md",
-    --   "BufNewFile path/to/my-vault/**.md",
-    -- },
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
