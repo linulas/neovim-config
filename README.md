@@ -28,6 +28,7 @@
     - [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) 
     - [figdget.nvim](https://github.com/j-hui/fidget.nvim) 
     - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim) 
+    - [nvim-colorizer](https://github.com/norcalli/nvim-colorizer.lua) 
 - AI
     - [chatgpt.nvim](https://github.com/jackMort/ChatGPT.nvim) 
 - Debug
