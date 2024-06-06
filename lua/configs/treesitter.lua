@@ -3,7 +3,6 @@ local M = {}
 local options = {
   ensure_installed = {
     "css",
-    "rust",
     "go",
     "html",
     "javascript",
@@ -12,6 +11,8 @@ local options = {
     "markdown",
     "markdown_inline",
     "printf",
+    "rust",
+    "scss",
     "svelte",
     "vim",
     "vimdoc",
