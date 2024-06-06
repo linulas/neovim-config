@@ -42,6 +42,17 @@ local function configure()
     args = { "--interpreter=vscode" },
   }
 
+  dap.adapters.delve = {
+    type = "server",
+    port = "${port}",
+    executable = {
+      command = "dlv",
+      args = { "dap", "-l", "127.0.0.1:${port}" },
+      -- add this if on windows, otherwise server won't open successfully
+      -- detached = false
+    },
+  }
+
   -- configurations
   dap.configurations.cpp = {
     {
@@ -102,21 +113,7 @@ local function configure_exts()
     dapui.close()
   end
 
-  -- require("dap-go").setup {
-  --   -- Additional dap configurations can be added.
-  --   -- dap_configurations accepts a list of tables where each entry
-  --   -- represents a dap configuration. For more details do:
-  --   -- :help dap-configuration
-  --   dap_configurations = {
-  --     {
-  --       type = "go",
-  --       request = "attach",
-  --       name = "Attach to Go Process",
-  --       mode = "local",
-  --       processId = require("dap.utils").pick_process,
-  --     },
-  --   },
-  -- }
+  require("dap-go").setup()
 end
 
 M.init = function()
