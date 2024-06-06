@@ -78,7 +78,7 @@ local default_settings = {
   LLDB_PATH = "/usr/local/opt/llvm/bin/lldb-vscode",
   ENABLE_PLUGIN_OBSIDIAN = false,
   OBSIDIAN_VAULT_PATH = "~/Documents",
-  RUST_ANALYZER_FEATURES= ""
+  RUST_ANALYZER_FEATURES= "" -- use a comma separeted value in your .env file like: RUST_ANALYZER_FEATURES=foo,bar
 }
 ```
 
