@@ -6,11 +6,19 @@ local servers = {
   "cssls",
   "html",
   "lua_ls",
+  "marksman",
   "nil_ls",
+  "rust_analyzer",
   "svelte",
   "tsserver",
-  "marksman",
 }
+
+local function get_rust_analyzer_features()
+  local tbl = {}
+  for value in vim.env.RUST_ANALYZER_FEATURES:gmatch "[^,]+" do
+    table.insert(tbl, value)
+  end
+end
 
 local function apply(curr, win)
   local newName = vim.trim(vim.fn.getline ".")
@@ -119,16 +127,38 @@ M.init = function()
   local lspconfig = require "lspconfig"
 
   for _, lsp in ipairs(servers) do
-    -- if lsp == "x" then
-    --   lspconfig.x.setup { }
-    -- else
-    -- lsps with default config
-    lspconfig[lsp].setup {
-      on_attach = on_attach_default,
-      on_init = on_init_default,
-      capabilities = capabilities_default,
-    }
-    -- end
+    if lsp == "rust_analyzer" then
+      lspconfig.rust_analyzer.setup {
+        on_attach = on_attach_default,
+        capabilities = capabilities_default,
+        settings = {
+          ["rust-analyzer"] = {
+            imports = {
+              granularity = {
+                group = "module",
+              },
+              prefix = "self",
+            },
+            cargo = {
+              buildScripts = {
+                enable = true,
+              },
+              features = get_rust_analyzer_features(),
+            },
+            procMacro = {
+              enable = true,
+            },
+          },
+        },
+      }
+    else
+      -- lsps with default config
+      lspconfig[lsp].setup {
+        on_attach = on_attach_default,
+        on_init = on_init_default,
+        capabilities = capabilities_default,
+      }
+    end
   end
 end
 
