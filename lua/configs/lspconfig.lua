@@ -4,6 +4,7 @@ local map = vim.keymap.set
 -- NOTE: Available configuration servers: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
   "cssls",
+  "gopls",
   "html",
   "jsonls",
   "lua_ls",

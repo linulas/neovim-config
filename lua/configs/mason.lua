@@ -2,17 +2,25 @@ local M = {}
 
 local options = {
   ensure_installed = {
+    "csharp-language-server",
     "css",
+    "codelldb",
     "go",
+    "gopls",
+    "golangci-lint",
+    "gofumpt",
     "html",
     "javascript",
     "lua-language-server",
     "marksman",
-    "rust",
+    "rust-analyzer",
+    "rustfmt",
+    "shfmt",
+    "shellcheck",
     "stylua",
     "toml",
     "typescript",
-    "yaml",
+    "yaml-language-server",
   }, -- not an option from mason.nvim
 
   PATH = "prepend",
