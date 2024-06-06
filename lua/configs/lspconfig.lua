@@ -5,6 +5,7 @@ local map = vim.keymap.set
 local servers = {
   "cssls",
   "html",
+  "jsonls",
   "lua_ls",
   "marksman",
   "nil_ls",
