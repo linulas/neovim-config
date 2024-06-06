@@ -3,19 +3,13 @@ local M = {}
 local options = {
   ensure_installed = {
     "csharp-language-server",
-    "css",
     "codelldb",
-    "go",
     "gopls",
-    "html",
-    "javascript",
     "lua-language-server",
     "marksman",
-    "shfmt",
-    "shellcheck",
     "stylua",
-    "toml",
-    "typescript",
+    "svelte-language-server",
+    "typescript-language-server",
     "yaml-language-server",
   }, -- not an option from mason.nvim
 
