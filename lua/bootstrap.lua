@@ -1,6 +1,7 @@
 local M = {}
 
 local default_settings = {
+  CORECLR_PATH = "/usr/local/netcoredbg",
   ENABLE_PLUGIN_MASON = true,
   ENABLE_PLUGIN_DAP = true,
   ENABLE_PLUGIN_OBSIDIAN = false,

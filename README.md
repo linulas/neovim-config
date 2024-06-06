@@ -72,6 +72,7 @@ Install all packages listed in ./lua/configs/mason.lua
 Default configuration from ./lua/bootstrap.lua:
 ```lua
 local default_settings = {
+  CORECLR_PATH = "/usr/local/netcoredbg",
   ENABLE_PLUGIN_MASON = true,
   ENABLE_PLUGIN_DAP = true,
   ENABLE_PLUGIN_OBSIDIAN = false,

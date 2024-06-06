@@ -32,15 +32,15 @@ local function configure()
   -- Adapters
   dap.adapters.lldb = {
     type = "executable",
-    command = vim.env.LLDB_PATH, -- adjust as needed, must be absolute path
+    command = vim.env.LLDB_PATH,
     name = "lldb",
   }
 
-  -- dap.adapters.coreclr = {
-  --   type = "executable",
-  --   command = "/usr/local/netcoredbg",
-  --   args = { "--interpreter=vscode" },
-  -- }
+  dap.adapters.coreclr = {
+    type = "executable",
+    command = vim.env.CORECLR_PATH,
+    args = { "--interpreter=vscode" },
+  }
 
   -- configurations
   dap.configurations.cpp = {
@@ -70,17 +70,17 @@ local function configure()
     },
   }
 
-  -- dap.configurations.cs = {
-  --   {
-  --     type = "coreclr",
-  --     name = "launch - netcoredbg",
-  --     request = "launch",
-  --     preLaunchTask = "build",
-  --     program = function()
-  --       return vim.fn.input("Path to dll", vim.fn.getcwd() .. "", "file")
-  --     end,
-  --   },
-  -- }
+  dap.configurations.cs = {
+    {
+      type = "coreclr",
+      name = "launch - netcoredbg",
+      request = "launch",
+      preLaunchTask = "build",
+      program = function()
+        return vim.fn.input("Path to dll", vim.fn.getcwd() .. "", "file")
+      end,
+    },
+  }
 
   dap.configurations.rust = dap.configurations.cpp
 end
