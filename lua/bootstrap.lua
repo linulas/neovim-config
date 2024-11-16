@@ -7,6 +7,7 @@ local default_settings = {
   ENABLE_PLUGIN_OBSIDIAN = false,
   LLDB_PATH = "/usr/local/opt/llvm/bin/lldb-vscode",
   OBSIDIAN_VAULT_PATH = "~/Documents",
+  TYPESCRIPT_PLUGIN_PATH= "/usr/local/lib/node_modules/@vue/typescript-plugin",
   RUST_ANALYZER_FEATURES= ""
 }
 

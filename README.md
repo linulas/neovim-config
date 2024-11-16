@@ -41,7 +41,7 @@
     
 
 ## Pre-requisites
-- Neovim 0.10
+- Neovim 0.10.2
 - Nerd Font as your terminal font
 - Ripgrep is required for grep searching with Telescope (OPTIONAL).
 - GCC, Windows users must have mingw installed and set on path
@@ -79,6 +79,7 @@ local default_settings = {
   LLDB_PATH = "/usr/local/opt/llvm/bin/lldb-vscode",
   ENABLE_PLUGIN_OBSIDIAN = false,
   OBSIDIAN_VAULT_PATH = "~/Documents",
+  TYPESCRIPT_PLUGIN_PATH= "/usr/local/lib/node_modules/@vue/typescript-plugin"
   RUST_ANALYZER_FEATURES= "" -- use a comma separeted value in your .env file like: RUST_ANALYZER_FEATURES=foo,bar
 }
 ```

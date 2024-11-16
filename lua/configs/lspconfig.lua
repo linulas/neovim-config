@@ -7,13 +7,15 @@ local servers = {
   "cssls",
   "gopls",
   "html",
+  "phpactor",
   "jsonls",
   "lua_ls",
   "marksman",
   "nil_ls",
   "rust_analyzer",
   "svelte",
-  "tsserver",
+  "ts_ls",
+  "volar",
 }
 
 local function get_rust_analyzer_features()
@@ -152,6 +154,23 @@ M.init = function()
               enable = true,
             },
           },
+        },
+      }
+    elseif lsp == "ts_ls" then
+      lspconfig.ts_ls.setup {
+        init_options = {
+          plugins = {
+            {
+              name = "@vue/typescript-plugin",
+              location = vim.env.TYPESCRIPT_PLUGIN_PATH,
+              languages = { "javascript", "typescript", "vue" },
+            },
+          },
+        },
+        filetypes = {
+          "javascript",
+          "typescript",
+          "vue",
         },
       }
     else
