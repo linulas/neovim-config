@@ -235,12 +235,6 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  -- FIX: Codeium plugin not working atm. Keeping tabs on this PR to be able to diagnose the plugin further:
-  -- https://github.com/Exafunction/codeium.nvim/pull/185
-  -- {
-  --   "Exafunction/codeium.vim",
-  --   lazy = false,
-  -- },
   -- }}}
 
   -- debug {{{
@@ -302,5 +296,9 @@ return {
     config = function()
       require("configs.obsidian").init()
     end,
+  },
+  {
+    "Exafunction/codeium.vim",
+    lazy = false,
   },
 }
