@@ -220,6 +220,16 @@ return {
     "norcalli/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
   },
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = {
+      { "juansalvatore/git-dashboard-nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
+    opts = function()
+      return require("configs.dashboard").opts()
+    end,
+  },
   -- }}}
 
   -- AI {{{
