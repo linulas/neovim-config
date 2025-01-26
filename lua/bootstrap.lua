@@ -5,6 +5,7 @@ local default_settings = {
   ENABLE_PLUGIN_MASON = true,
   ENABLE_PLUGIN_DAP = true,
   ENABLE_PLUGIN_OBSIDIAN = false,
+  FLOTE_NOTES_PATH = "~/Documents/flote",
   LLDB_PATH = "/usr/local/opt/llvm/bin/lldb-vscode",
   OBSIDIAN_VAULT_PATH = "~/Documents",
   TYPESCRIPT_PLUGIN_PATH= "/usr/local/lib/node_modules/@vue/typescript-plugin",
