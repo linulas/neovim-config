@@ -48,13 +48,13 @@ map("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = "Close diffview" })
 
 map("n", "]]", function()
   vim.schedule(function()
-    require("gitsigns").next_hunk()
+    require("gitsigns").nav_hunk("next")
   end)
 end, { desc = "Next git hunk" })
 
 map("n", "[[", function()
   vim.schedule(function()
-    require("gitsigns").prev_hunk()
+    require("gitsigns").nav_hunk("prev")
   end)
 end, { desc = "Previous git hunk" })
 
@@ -118,6 +118,12 @@ map(
   "<leader>fa",
   "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
   { desc = "telescope find all files" }
+)
+map(
+  "n",
+  "<leader>fs",
+  "<cmd>Telescope live_grep follow=true no_ignore=true hidden=true<CR>",
+  { desc = "telescope grep all" }
 )
 
 -- terminal
