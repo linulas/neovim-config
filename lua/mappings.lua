@@ -1,7 +1,6 @@
 local map = vim.keymap.set
 
 -- general
-map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("i", "[", "[]<Left>", { noremap = true, silent = true })
 map("i", "{", "{}<Left>", { noremap = true, silent = true })
@@ -100,8 +99,11 @@ map(
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
 -- AI
-map("n", "<leader>p", "<cmd>ChatGPT<CR>", { desc = "Prompt chatgpt" })
-map("v", "<leader>e", "<ESC><cmd>ChatGPTEditWithInstructions<CR>", { desc = "Edit with instructions using chatgpt" })
+map("n", "<leader>p", "<cmd>CodeCompanionChat<CR>", { desc = "Open AI chat (Gemini)" })
+map("n", "t", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle AI chat (Gemini)" })
+map("v", "<leader>e", ":CodeCompanion /explain<CR>", { desc = "Explain selection" })
+map("n", ";", ":CodeCompanion ", { desc = "Prompt AI" })
+map("v", ";", ":CodeCompanion ", { desc = "Prompt AI about selection" })
 
 -- telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })

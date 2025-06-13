@@ -9,7 +9,8 @@ local default_settings = {
   LLDB_PATH = "/usr/local/opt/llvm/bin/lldb-vscode",
   OBSIDIAN_VAULT_PATH = "~/Documents",
   TYPESCRIPT_PLUGIN_PATH= "/usr/local/lib/node_modules/@vue/typescript-plugin",
-  RUST_ANALYZER_FEATURES= ""
+  RUST_ANALYZER_FEATURES= "",
+  GEMINI_API_KEY=""
 }
 
 --- Parses a configuration file and sets environment varaiables accordingly.

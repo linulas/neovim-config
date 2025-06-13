@@ -69,6 +69,11 @@ return {
     end,
   },
 
+  {
+    "jamestthompson3/nvim-remote-containers",
+    lazy = false,
+  },
+
   -- }}}
 
   -- git {{{
@@ -231,19 +236,21 @@ return {
     end,
   },
   -- }}}
-
-  -- AI {{{
   {
-    "jackMort/ChatGPT.nvim",
-    cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
-    config = function()
-      require("chatgpt").setup {}
-    end,
+    "olimorris/codecompanion.nvim",
+    opts = {},
+    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
+    config = function()
+      require("configs.codecompanion").init()
+    end,
+  },
+  {
+    "Exafunction/codeium.vim",
+    lazy = false,
   },
   -- }}}
 
@@ -306,9 +313,5 @@ return {
     config = function()
       require("configs.obsidian").init()
     end,
-  },
-  {
-    "Exafunction/codeium.vim",
-    lazy = false,
   },
 }
