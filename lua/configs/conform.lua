@@ -6,6 +6,7 @@ local options = {
     css = { "prettierd" },
     html = { "prettierd" },
     php = { "php-cs-fixer" },
+    vue = { "eslint" },
   },
   formatters = {
     nix = {
