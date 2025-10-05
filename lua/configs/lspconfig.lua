@@ -145,6 +145,9 @@ M.init = function()
               },
               prefix = "self",
             },
+            check = {
+              command = "clippy",
+            },
             cargo = {
               buildScripts = {
                 enable = true,
