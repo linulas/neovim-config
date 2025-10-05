@@ -131,11 +131,10 @@ M.init = function()
   -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
   ---@diagnostic disable-next-line: missing-fields
   require("neodev").setup {}
-  local lspconfig = require "lspconfig"
 
   for _, lsp in ipairs(servers) do
     if lsp == "rust_analyzer" then
-      lspconfig.rust_analyzer.setup {
+      vim.lsp.config("rust_analyzer", {
         on_attach = on_attach_default,
         capabilities = capabilities_default,
         settings = {
@@ -157,9 +156,9 @@ M.init = function()
             },
           },
         },
-      }
+      })
     elseif lsp == "ts_ls" then
-      lspconfig.ts_ls.setup {
+      vim.lsp.config("ts_ls", {
         init_options = {
           plugins = {
             {
@@ -174,7 +173,7 @@ M.init = function()
           "typescript",
           "vue",
         },
-      }
+      })
     elseif lsp == "eslint" then
       local customizations = {
         { rule = "style/*", severity = "off", fixable = true },
@@ -188,7 +187,7 @@ M.init = function()
         { rule = "*quotes", severity = "off", fixable = true },
         { rule = "*semi", severity = "off", fixable = true },
       }
-      lspconfig.eslint.setup {
+      vim.lsp.config("eslint", {
         filetypes = {
           "javascript",
           "javascriptreact",
@@ -224,14 +223,14 @@ M.init = function()
             command = "EslintFixAll",
           })
         end,
-      }
+      })
     else
       -- lsps with default config
-      lspconfig[lsp].setup {
+      vim.lsp.config(lsp, {
         on_attach = on_attach_default,
         on_init = on_init_default,
         capabilities = capabilities_default,
-      }
+      })
     end
   end
 end
