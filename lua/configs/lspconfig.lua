@@ -129,7 +129,7 @@ M.init = function()
   })
 
   -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
----@diagnostic disable-next-line: missing-fields
+  ---@diagnostic disable-next-line: missing-fields
   require("neodev").setup {}
   local lspconfig = require "lspconfig"
 
@@ -177,16 +177,16 @@ M.init = function()
       }
     elseif lsp == "eslint" then
       local customizations = {
-        { rule = 'style/*', severity = 'off', fixable = true },
-        { rule = 'format/*', severity = 'off', fixable = true },
-        { rule = '*-indent', severity = 'off', fixable = true },
-        { rule = '*-spacing', severity = 'off', fixable = true },
-        { rule = '*-spaces', severity = 'off', fixable = true },
-        { rule = '*-order', severity = 'off', fixable = true },
-        { rule = '*-dangle', severity = 'off', fixable = true },
-        { rule = '*-newline', severity = 'off', fixable = true },
-        { rule = '*quotes', severity = 'off', fixable = true },
-        { rule = '*semi', severity = 'off', fixable = true },
+        { rule = "style/*", severity = "off", fixable = true },
+        { rule = "format/*", severity = "off", fixable = true },
+        { rule = "*-indent", severity = "off", fixable = true },
+        { rule = "*-spacing", severity = "off", fixable = true },
+        { rule = "*-spaces", severity = "off", fixable = true },
+        { rule = "*-order", severity = "off", fixable = true },
+        { rule = "*-dangle", severity = "off", fixable = true },
+        { rule = "*-newline", severity = "off", fixable = true },
+        { rule = "*quotes", severity = "off", fixable = true },
+        { rule = "*semi", severity = "off", fixable = true },
       }
       lspconfig.eslint.setup {
         filetypes = {
@@ -212,7 +212,7 @@ M.init = function()
           "less",
           "scss",
           "pcss",
-          "postcss"
+          "postcss",
         },
         settings = {
           -- Silent the stylistic rules in you IDE, but still auto fix them
