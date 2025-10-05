@@ -16,7 +16,7 @@ local servers = {
   "rust_analyzer",
   "svelte",
   "ts_ls",
-  "volar",
+  "vue_ls",
 }
 
 local function get_rust_analyzer_features()
@@ -134,7 +134,7 @@ M.init = function()
 
   for _, lsp in ipairs(servers) do
     if lsp == "rust_analyzer" then
-      vim.lsp.config("rust_analyzer", {
+      vim.lsp.config.rust_analyzer = {
         on_attach = on_attach_default,
         capabilities = capabilities_default,
         settings = {
@@ -156,9 +156,10 @@ M.init = function()
             },
           },
         },
-      })
+      }
+      vim.lsp.enable("rust_analyzer")
     elseif lsp == "ts_ls" then
-      vim.lsp.config("ts_ls", {
+      vim.lsp.config.ts_ls = {
         init_options = {
           plugins = {
             {
@@ -173,7 +174,8 @@ M.init = function()
           "typescript",
           "vue",
         },
-      })
+      }
+      vim.lsp.enable("ts_ls")
     elseif lsp == "eslint" then
       local customizations = {
         { rule = "style/*", severity = "off", fixable = true },
@@ -187,7 +189,7 @@ M.init = function()
         { rule = "*quotes", severity = "off", fixable = true },
         { rule = "*semi", severity = "off", fixable = true },
       }
-      vim.lsp.config("eslint", {
+      vim.lsp.config.eslint = {
         filetypes = {
           "javascript",
           "javascriptreact",
@@ -223,14 +225,16 @@ M.init = function()
             command = "EslintFixAll",
           })
         end,
-      })
+      }
+      vim.lsp.enable("eslint")
     else
       -- lsps with default config
-      vim.lsp.config(lsp, {
+      vim.lsp.config[lsp] = {
         on_attach = on_attach_default,
         on_init = on_init_default,
         capabilities = capabilities_default,
-      })
+      }
+      vim.lsp.enable(lsp)
     end
   end
 end
