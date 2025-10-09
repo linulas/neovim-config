@@ -81,14 +81,14 @@ local clients_lsp = function()
   return "\u{f085}  LSP ~ " .. table.concat(c, "|")
 end
 
-local get_workspace_name = function()
-  local name = ""
-  local path = vim.fn.getcwd()
-  for _, value in string.gmatch(path, "(%w+)/(%w+)") do
-    name = value
-  end
-  return "\u{f07b} " .. name
-end
+-- local get_workspace_name = function()
+--   local name = ""
+--   local path = vim.fn.getcwd()
+--   for _, value in string.gmatch(path, "(%w+)/(%w+)") do
+--     name = value
+--   end
+--   return "\u{f07b} " .. name
+-- end
 
 local options = {
   options = {
@@ -113,7 +113,7 @@ local options = {
     },
     lualine_x = {
       "searchcount",
-      get_workspace_name,
+      -- get_workspace_name,
     },
     lualine_y = { clients_lsp },
     lualine_z = { "progress" },
