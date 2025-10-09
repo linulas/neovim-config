@@ -160,7 +160,7 @@ M.init = function()
           },
         },
       }
-      vim.lsp.enable("rust_analyzer")
+      vim.lsp.enable "rust_analyzer"
     elseif lsp == "ts_ls" then
       vim.lsp.config.ts_ls = {
         init_options = {
@@ -178,7 +178,7 @@ M.init = function()
           "vue",
         },
       }
-      vim.lsp.enable("ts_ls")
+      vim.lsp.enable "ts_ls"
     elseif lsp == "eslint" then
       local customizations = {
         { rule = "style/*", severity = "off", fixable = true },
@@ -221,15 +221,44 @@ M.init = function()
         settings = {
           -- Silent the stylistic rules in you IDE, but still auto fix them
           rulesCustomizations = customizations,
+          ["eslint.enable"] = true, -- Ensure ESLint is enabled
+          ["eslint.run"] = "onSave", -- Run ESLint checks and actions on save
+          ["eslint.codeActionsOnSave"] = { "source.fixAll" }, -- Apply source.fixAll code actions on save
+          -- You might also need to explicitly validate filetypes if not covered by filetypes in lspconfig.setup
+          ["eslint.validate"] = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "vue",
+            "html",
+            "markdown",
+            "json",
+            "jsonc",
+            "yaml",
+            "toml",
+            "xml",
+            "gql",
+            "graphql",
+            "astro",
+            "svelte",
+            "css",
+            "less",
+            "scss",
+            "pcss",
+            "postcss",
+          },
         },
-        on_attach = function(_, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
-        end,
+        -- on_attach = function(_, bufnr)
+        --   vim.api.nvim_create_autocmd("BufWritePre", {
+        --     buffer = bufnr,
+        --     command = "EslintFixAll",
+        --   })
+        -- end,
       }
-      vim.lsp.enable("eslint")
+      vim.lsp.enable "eslint"
     else
       -- lsps with default config
       vim.lsp.config[lsp] = {
