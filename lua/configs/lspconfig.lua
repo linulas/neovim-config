@@ -21,6 +21,10 @@ local servers = {
 
 local function get_rust_analyzer_features()
   local tbl = {}
+  if vim.env.RUST_ANALYZER_FEATURES == nil then
+    return tbl
+  end
+
   for value in vim.env.RUST_ANALYZER_FEATURES:gmatch "[^,]+" do
     table.insert(tbl, value)
   end
