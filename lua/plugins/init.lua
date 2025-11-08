@@ -144,7 +144,6 @@ return {
 
   {
     "numToStr/Comment.nvim",
-    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     keys = {
       { "gcc", mode = "n", desc = "comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "comment toggle linewise" },
