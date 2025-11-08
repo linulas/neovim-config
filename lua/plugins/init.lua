@@ -54,6 +54,7 @@ return {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
     dependencies = "nvim-tree/nvim-web-devicons",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     config = function()
       require("trouble").setup {}
     end,
@@ -98,6 +99,7 @@ return {
 
   {
     "sindrets/diffview.nvim",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     cmd = "DiffviewOpen",
   },
   -- }}}
@@ -115,6 +117,7 @@ return {
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTelescope", "TodoTelescope" },
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     dependencies = "nvim-lua/plenary.nvim",
     opts = require "configs.todo_comments",
   },
@@ -122,6 +125,7 @@ return {
   {
     "phaazon/hop.nvim",
     cmd = { "HopWord", "HopChar1CurrentLine" },
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     branch = "v2", -- optional but strongly recommended
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
@@ -140,6 +144,7 @@ return {
 
   {
     "numToStr/Comment.nvim",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     keys = {
       { "gcc", mode = "n", desc = "comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "comment toggle linewise" },
@@ -196,6 +201,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     event = "VeryLazy",
     config = function()
       require("configs.lualine").init()
@@ -205,6 +211,7 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("configs.nvimtree").init()
@@ -214,15 +221,17 @@ return {
   {
     "j-hui/fidget.nvim",
     event = "VeryLazy",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     config = function()
       require("fidget").setup {}
     end,
   },
 
-  { "folke/zen-mode.nvim", cmd = "ZenMode" },
+  { "folke/zen-mode.nvim", cmd = "ZenMode", cond = vim.env.CONFIGURATION_TYPE ~= "minimal" },
 
   {
     "norcalli/nvim-colorizer.lua",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     cmd = "ColorizerToggle",
   },
   {
@@ -239,6 +248,7 @@ return {
   {
     "olimorris/codecompanion.nvim",
     opts = {},
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -250,6 +260,7 @@ return {
   },
   {
     "Exafunction/codeium.vim",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     lazy = false,
   },
   -- }}}
@@ -277,6 +288,7 @@ return {
   {
     "JellyApple102/flote.nvim",
     cmd = "Flote",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     config = function()
       require("configs.flote").init()
     end,
@@ -285,6 +297,7 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && npm install",
+    cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,

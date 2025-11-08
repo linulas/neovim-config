@@ -1,4 +1,7 @@
+-- vim:foldmethod=marker
 local map = vim.keymap.set
+
+-- ########### Minimal config ########### {{{
 
 -- general
 map("i", "jk", "<ESC>")
@@ -33,32 +36,10 @@ map({ "n", "i" }, "<C-u>", "<C-u>zz", { desc = "Navigate half up and center curs
 map("n", "s", "<cmd> w <CR>", { desc = "Save current buffer" })
 map("n", "S", "<cmd> wa <CR>", { desc = "Save all active buffers" })
 map("n", "<ENTER>", "o<ESC>", { desc = "New line" })
-
-map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle zen mode" })
-
 -- git
 map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Open lazygit" })
 map("n", "<leader>gh", "<cmd>LazyGitFilterCurrentFile<cr>", { desc = "Open current buffer commits" })
 map("n", "<leader>gc", "<cmd>LazyGitConfig<cr>", { desc = "Open lazygit config" })
-map("n", "<leader>gb", "<cmd>Gitsigns blame_line<cr>", { desc = "Show blame information for the current line in popup" })
-map("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Open diffview" })
-map("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = "Close diffview" })
-map("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = "Close diffview" })
-
-map("n", "]]", function()
-  vim.schedule(function()
-    require("gitsigns").nav_hunk("next")
-  end)
-end, { desc = "Next git hunk" })
-
-map("n", "[[", function()
-  vim.schedule(function()
-    require("gitsigns").nav_hunk("prev")
-  end)
-end, { desc = "Previous git hunk" })
-
--- lsp
-map("n", "<leader>q", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "Troubleshoot workspace" })
 
 map("n", "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
@@ -78,15 +59,11 @@ map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Go to next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Go to previous buffer" })
 map("n", "<leader>cb", "<cmd>%bd|e#|bd#<CR>", { desc = "Close all except active buffer" })
 map("n", "<leader>x", "<cmd>bd<CR>", { desc = "Close current buffer" })
-map("n", "f", ":HopWord<cr>", { desc = "Hop word on entire buffer" })
 
 -- comment
 map("n", "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
 end, { desc = "comment toggle" })
-map("n", "<leader>ft", ":TodoTelescope<cr>", { desc = "Find all comment tags" })
-map("n", "<leader>fq", ":TodoTrouble<cr>", { desc = "Open troble tags" })
-map("n", "<leader>fk", ":TodoTelescope keywords=FIX,TODO,BUG,FIX<cr>", { desc = "Find keyword comment tags" })
 
 map(
   "v",
@@ -94,16 +71,6 @@ map(
   "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
   { desc = "comment toggle" }
 )
-
--- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-
--- AI
-map("n", "<leader>p", "<cmd>CodeCompanionChat<CR>", { desc = "Open AI chat (Gemini)" })
-map("n", "t", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle AI chat (Gemini)" })
-map("v", "<leader>e", ":CodeCompanion /explain<CR>", { desc = "Explain selection" })
-map("n", ";", ":CodeCompanion ", { desc = "Prompt AI" })
-map("v", ";", ":CodeCompanion ", { desc = "Prompt AI about selection" })
 
 -- telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
@@ -152,31 +119,81 @@ end, { desc = "terminal new horizontal term" })
 map({ "n", "t" }, "<A-i>", function()
   require("nvterm.terminal").toggle "float"
 end, { desc = "terminal toggle floating term" })
+-- }}}
 
--- notes
-map("n", "<leader>n", "<cmd>Flote<CR>", { desc = "Project notes" })
-map("n", "<leader>mg", "<cmd>Flote global<CR>", { desc = "Global notes" })
-map("n", "<leader>mn", "<cmd>Flote manage<CR>", { desc = "Manage notes" })
-map("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Start Markdown preview" })
-map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<CR>", { desc = "Stop Markdown preview" })
+-- ########### Extended config ########### {{{
+if vim.env.CONFIGURATION_TYPE ~= "minimal" then
+  map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle zen mode" })
 
-map("n", "<leader>fn", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Find notes" })
-map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Open current note in Obsidian" })
-map("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "Search references to the current buffer" })
-map("n", "<leader>of", "<cmd>ObsidianTags<CR>", { desc = "Search obsidian tags" })
-map("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search for (or create) notes in vault" })
-map("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "Collect all links within the current buffer" })
-map("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Pick a obisidian template" })
-map("v", "<leader>ol", ":'<,'>ObsidianLinkNew<CR>", { desc = "Create a new note and link to it" })
-map("v", "<leader>oe", ":'<,'>ObsidianExtractNote<CR>", { desc = "Extract text into new note and link to it" })
+  -- git
+  map(
+    "n",
+    "<leader>gb",
+    "<cmd>Gitsigns blame_line<cr>",
+    { desc = "Show blame information for the current line in popup" }
+  )
+  map("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Open diffview" })
+  map("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = "Close diffview" })
+  map("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = "Close diffview" })
 
--- debugging
-map("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", { desc = "Toggle breakpoint" })
-map("n", "<leader>dq", "<cmd>lua require('dap').close()<cr>", { desc = "Quit debugging" })
-map("n", "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", { desc = "Toggle debugging UI" })
-map("n", "<leader>d4", ":lua require('dap').continue()<cr>", { desc = "Start debugging" })
-map({ "n", "i" }, "<A-1>", "<cmd>lua require('dap').step_over()<cr>", { desc = "Step over" })
-map({ "n", "i" }, "<A-2>", "<cmd>lua require('dap').step_into()<cr>", { desc = "Step into" })
-map({ "n", "i" }, "<A-3>", "<cmd>lua require('dap').step_out()<cr>", { desc = "Step out" })
-map({ "n", "i" }, "<A-4>", "<cmd>lua require('dap').continue()<cr>", { desc = "Continue" })
-map({ "n", "i" }, "<A-5>", "<cmd>lua require('dap').continue()<cr>", { desc = "Start debugging" })
+  map("n", "]]", function()
+    vim.schedule(function()
+      require("gitsigns").nav_hunk "next"
+    end)
+  end, { desc = "Next git hunk" })
+
+  map("n", "[[", function()
+    vim.schedule(function()
+      require("gitsigns").nav_hunk "prev"
+    end)
+  end, { desc = "Previous git hunk" })
+
+  -- lsp
+  map("n", "<leader>q", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "Troubleshoot workspace" })
+
+  -- buffer
+  map("n", "f", ":HopWord<cr>", { desc = "Hop word on entire buffer" })
+
+  -- comment
+  map("n", "<leader>ft", ":TodoTelescope<cr>", { desc = "Find all comment tags" })
+  map("n", "<leader>fq", ":TodoTrouble<cr>", { desc = "Open troble tags" })
+  map("n", "<leader>fk", ":TodoTelescope keywords=FIX,TODO,BUG,FIX<cr>", { desc = "Find keyword comment tags" })
+
+  -- nvimtree
+  map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+
+  -- AI
+  map("n", "<leader>p", "<cmd>CodeCompanionChat<CR>", { desc = "Open AI chat (Gemini)" })
+  map("n", "t", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle AI chat (Gemini)" })
+  map("v", "<leader>e", ":CodeCompanion /explain<CR>", { desc = "Explain selection" })
+  map("n", ";", ":CodeCompanion ", { desc = "Prompt AI" })
+  map("v", ";", ":CodeCompanion ", { desc = "Prompt AI about selection" })
+
+  -- notes
+  map("n", "<leader>n", "<cmd>Flote<CR>", { desc = "Project notes" })
+  map("n", "<leader>mg", "<cmd>Flote global<CR>", { desc = "Global notes" })
+  map("n", "<leader>mn", "<cmd>Flote manage<CR>", { desc = "Manage notes" })
+  map("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Start Markdown preview" })
+  map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<CR>", { desc = "Stop Markdown preview" })
+
+  map("n", "<leader>fn", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Find notes" })
+  map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Open current note in Obsidian" })
+  map("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "Search references to the current buffer" })
+  map("n", "<leader>of", "<cmd>ObsidianTags<CR>", { desc = "Search obsidian tags" })
+  map("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search for (or create) notes in vault" })
+  map("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "Collect all links within the current buffer" })
+  map("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Pick a obisidian template" })
+  map("v", "<leader>ol", ":'<,'>ObsidianLinkNew<CR>", { desc = "Create a new note and link to it" })
+  map("v", "<leader>oe", ":'<,'>ObsidianExtractNote<CR>", { desc = "Extract text into new note and link to it" })
+
+  -- debugging
+  map("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", { desc = "Toggle breakpoint" })
+  map("n", "<leader>dq", "<cmd>lua require('dap').close()<cr>", { desc = "Quit debugging" })
+  map("n", "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", { desc = "Toggle debugging UI" })
+  map("n", "<leader>d4", ":lua require('dap').continue()<cr>", { desc = "Start debugging" })
+  map({ "n", "i" }, "<A-1>", "<cmd>lua require('dap').step_over()<cr>", { desc = "Step over" })
+  map({ "n", "i" }, "<A-2>", "<cmd>lua require('dap').step_into()<cr>", { desc = "Step into" })
+  map({ "n", "i" }, "<A-3>", "<cmd>lua require('dap').step_out()<cr>", { desc = "Step out" })
+  map({ "n", "i" }, "<A-4>", "<cmd>lua require('dap').continue()<cr>", { desc = "Continue" })
+  map({ "n", "i" }, "<A-5>", "<cmd>lua require('dap').continue()<cr>", { desc = "Start debugging" })
+end
