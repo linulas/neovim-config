@@ -132,10 +132,6 @@ M.init = function()
     silent = true,
   })
 
-  -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-  ---@diagnostic disable-next-line: missing-fields
-  require("neodev").setup {}
-
   for _, lsp in ipairs(servers) do
     if lsp == "rust_analyzer" then
       vim.lsp.config.rust_analyzer = {
