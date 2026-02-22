@@ -148,16 +148,14 @@ if vim.env.CONFIGURATION_TYPE ~= "minimal" then
     end)
   end, { desc = "Previous git hunk" })
 
-  -- lsp
-  map("n", "<leader>q", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "Troubleshoot workspace" })
-
-  -- buffer
-  map("n", "f", ":HopWord<cr>", { desc = "Hop word on entire buffer" })
-
-  -- comment
+  -- Trouble
+  map("n", "<leader>q", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Troubleshoot workspace" })
   map("n", "<leader>ft", ":TodoTelescope<cr>", { desc = "Find all comment tags" })
   map("n", "<leader>fq", ":TodoTrouble<cr>", { desc = "Open troble tags" })
   map("n", "<leader>fk", ":TodoTelescope keywords=FIX,TODO,BUG,FIX<cr>", { desc = "Find keyword comment tags" })
+
+  -- buffer
+  map("n", "f", ":HopWord<cr>", { desc = "Hop word on entire buffer" })
 
   -- nvimtree
   map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })

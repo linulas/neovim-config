@@ -61,7 +61,7 @@ return {
 
   {
     "folke/trouble.nvim",
-    cmd = "TroubleToggle",
+    cmd = "Trouble",
     dependencies = "nvim-tree/nvim-web-devicons",
     cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     config = function()
