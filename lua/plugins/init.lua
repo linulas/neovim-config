@@ -142,8 +142,6 @@ return {
     end,
   },
 
-  { "lambdalisue/vim-suda", cmd = "SudaWrite" },
-
   {
     "NvChad/nvterm",
     config = function()
@@ -235,13 +233,12 @@ return {
     end,
   },
 
-  { "folke/zen-mode.nvim", cmd = "ZenMode", cond = vim.env.CONFIGURATION_TYPE ~= "minimal" },
-
   {
     "norcalli/nvim-colorizer.lua",
     cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
     cmd = "ColorizerToggle",
   },
+
   {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
@@ -253,6 +250,8 @@ return {
     end,
   },
   -- }}}
+
+  -- AI {{{
   {
     "olimorris/codecompanion.nvim",
     opts = {},

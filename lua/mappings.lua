@@ -123,8 +123,6 @@ end, { desc = "terminal toggle floating term" })
 
 -- ########### Extended config ########### {{{
 if vim.env.CONFIGURATION_TYPE ~= "minimal" then
-  map("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle zen mode" })
-
   -- git
   map(
     "n",
