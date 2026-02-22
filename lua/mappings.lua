@@ -173,8 +173,6 @@ if vim.env.CONFIGURATION_TYPE ~= "minimal" then
   map("n", "<leader>n", "<cmd>Flote<CR>", { desc = "Project notes" })
   map("n", "<leader>mg", "<cmd>Flote global<CR>", { desc = "Global notes" })
   map("n", "<leader>mn", "<cmd>Flote manage<CR>", { desc = "Manage notes" })
-  map("n", "<leader>mp", "<cmd>MarkdownPreview<CR>", { desc = "Start Markdown preview" })
-  map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<CR>", { desc = "Stop Markdown preview" })
 
   map("n", "<leader>fn", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Find notes" })
   map("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Open current note in Obsidian" })
