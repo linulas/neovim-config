@@ -3,13 +3,13 @@ local M = {}
 local options = {
   strategies = {
     chat = {
-      adapter = "gemini",
+      adapter = "openai",
     },
     inline = {
-      adapter = "gemini",
+      adapter = "openai",
     },
     cmd = {
-      adapter = "gemini",
+      adapter = "openai",
     },
   },
   adapters = {
@@ -18,6 +18,13 @@ local options = {
         return require("codecompanion.adapters").extend("gemini", {
           env = {
             api_key = vim.env.GEMINI_API_KEY,
+          },
+        })
+      end,
+      openai = function()
+        return require("codecompanion.adapters").extend("openai", {
+          env = {
+            api_key = vim.env.OPENAI_API_KEY,
           },
         })
       end,
