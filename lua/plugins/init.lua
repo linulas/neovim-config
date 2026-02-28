@@ -78,12 +78,6 @@ return {
       require("configs.treesitter").init()
     end,
   },
-
-  {
-    "jamestthompson3/nvim-remote-containers",
-    lazy = false,
-  },
-
   -- }}}
 
   -- git {{{
@@ -114,6 +108,18 @@ return {
   -- }}}
 
   -- utilities {{{
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-lua/plenary.nvim",
+    },
+    cmd = "Telescope",
+    config = function()
+      require("configs.telescope").init()
+    end,
+  },
+
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
@@ -180,18 +186,6 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd [[colorscheme dracula]]
-    end,
-  },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-lua/plenary.nvim",
-    },
-    cmd = "Telescope",
-    config = function()
-      require("configs.telescope").init()
     end,
   },
 
