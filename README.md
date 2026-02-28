@@ -4,7 +4,7 @@
 - LSP
     - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
     - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-    - [neodev.nvim](https://github.com/folke/neodev.nvim)
+    - [lazydev.nvim](https://github.com/folke/lazydev.nvim)
     - [conform.nvim](https://github.com/stevearc/conform.nvim)
     - [trouble.nvim](https://github.com/folke/trouble.nvim)
     - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) 
@@ -13,35 +13,34 @@
     - [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) 
     - [diffview.nvim](https://github.com/sindrets/diffview.nvim) 
 - Utilities
+    - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) 
     - [mason.nvim](https://github.com/williamboman/mason.nvim) 
     - [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) 
     - [hop.nvim](https://github.com/hadronized/hop.nvim) 
-    - [vim-suda](https://github.com/lambdalisue/vim-suda) 
     - [nvterm](https://github.com/zbirenbaum/nvterm) 
-    - [comment.nvim](https://github.com/numToStr/Comment.nvim) [mason.nvim](https://github.com/kdheepak/lazygit.nvim) 
+    - [comment.nvim](https://github.com/numToStr/Comment.nvim)
     - [nvim-surround](https://github.com/kylechui/nvim-surround)
 - UI
     - [dracula.nvim](https://github.com/Mofiqul/dracula.nvim) 
-    - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) 
     - [which-key.nvim](https://github.com/folke/which-key.nvim) 
     - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) 
     - [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) 
     - [figdget.nvim](https://github.com/j-hui/fidget.nvim) 
-    - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim) 
     - [nvim-colorizer](https://github.com/norcalli/nvim-colorizer.lua) 
+    - [dashboard.nvim](https://github.com/nvimdev/dashboard-nvim) 
 - AI
-    - [chatgpt.nvim](https://github.com/jackMort/ChatGPT.nvim) 
+    - [codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim) 
+    - [windsurf.vim](https://github.com/Exafunction/windsurf.vim) 
 - Debug
     - [nvim-dap](https://github.com/mfussenegger/nvim-dap) 
 - Notes
     - [flote.nvim](https://github.com/JellyApple102/flote.nvim) 
-    - [nvim-dap](https://github.com/mfussenegger/nvim-dap) 
-    - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) 
-    - [obsidian.nvim](https://github.com/epwalsh/obsidian.nvim) 
+    - [render-markdown.nvim](https://github.com/iamcco/markdown-preview.nvim) 
+    - [obsidian.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) 
     
 
 ## Pre-requisites
-- Neovim 0.10.2
+- Neovim 0.11.0
 - Nerd Font as your terminal font
 - Ripgrep is required for grep searching with Telescope (OPTIONAL).
 - GCC, Windows users must have mingw installed and set on path
@@ -84,7 +83,7 @@ local default_settings = {
 }
 ```
 
-To override the defaults, create <nvim_config_path>/.env and pass the desired settings
+To override the defaults, create <nvim_config_path>/.env and pass the desired settings, for example:
 ```bash
 ENABLE_PLUGIN_MASON=false
 LLDB_PATH=/run/current-system/sw/bin/lldb-vscode
