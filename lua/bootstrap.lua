@@ -10,7 +10,8 @@ local default_settings = {
   OBSIDIAN_VAULT_PATH = "~/Documents",
   TYPESCRIPT_PLUGIN_PATH= "/usr/local/lib/node_modules/@vue/typescript-plugin",
   RUST_ANALYZER_FEATURES= "",
-  GEMINI_API_KEY=""
+  GEMINI_API_KEY="",
+  OPENAI_API_KEY=""
 }
 
 --- Parses a configuration file and sets environment varaiables accordingly.
