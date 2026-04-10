@@ -1,7 +1,7 @@
 local M = {}
 local map = vim.keymap.set
 
--- NOTE: Available configuration servers: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- NOTE: Available configuration servers: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 local servers = {
   "csharp_ls",
   "cssls",
@@ -16,7 +16,6 @@ local servers = {
   "rust_analyzer",
   "svelte",
   "ts_ls",
-  "vue_ls",
 }
 
 local function get_rust_analyzer_features()
@@ -28,45 +27,6 @@ local function get_rust_analyzer_features()
   for value in vim.env.RUST_ANALYZER_FEATURES:gmatch "[^,]+" do
     table.insert(tbl, value)
   end
-end
-
-local function apply(curr, win)
-  local newName = vim.trim(vim.fn.getline ".")
-  vim.api.nvim_win_close(win, true)
-
-  if #newName > 0 and newName ~= curr then
-    local params = vim.lsp.util.make_position_params()
-    params.newName = newName
-
-    vim.lsp.buf_request(0, "textDocument/rename", params)
-  end
-end
-
-local rename = function()
-  local currName = vim.fn.expand "<cword>" .. " "
-
-  local win = require("plenary.popup").create(currName, {
-    title = "Renamer",
-    style = "minimal",
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    relative = "cursor",
-    borderhighlight = "RenamerBorder",
-    titlehighlight = "RenamerTitle",
-    focusable = true,
-    width = 25,
-    height = 1,
-    line = "cursor+2",
-    col = "cursor-1",
-  })
-
-  vim.cmd "normal A"
-  vim.cmd "startinsert"
-
-  map({ "i", "n" }, "<Esc>", "<cmd>q<CR>", { buffer = 0 })
-  map({ "i", "n" }, "<CR>", function()
-    apply(currName, win)
-    vim.cmd.stopinsert()
-  end, { buffer = 0 })
 end
 
 local on_attach_default = function(_, bufnr)
@@ -87,15 +47,11 @@ local on_attach_default = function(_, bufnr)
   map("n", "<leader>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts "List workspace folders")
-
-  map("n", "<leader>ra", function()
-    rename()
-  end, opts "Renamer")
 end
 
 -- disable semanticTokens
 local on_init_default = function(client, _)
-  if client.supports_method "textDocument/semanticTokens" then
+  if client:supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
 end
@@ -121,17 +77,6 @@ capabilities_default.textDocument.completion.completionItem = {
 }
 
 M.init = function()
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "single",
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "single",
-    focusable = false,
-    relative = "cursor",
-    silent = true,
-  })
-
   for _, lsp in ipairs(servers) do
     if lsp == "rust_analyzer" then
       vim.lsp.config.rust_analyzer = {
