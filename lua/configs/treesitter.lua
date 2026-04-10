@@ -1,16 +1,23 @@
 local M = {}
 
-local options = {
-  ensure_installed = {
+M.init = function()
+  require("nvim-treesitter").setup()
+  vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+      -- Enable treesitter highlighting and disable regex syntax
+      pcall(vim.treesitter.start)
+      -- Enable treesitter-based indentation
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+  })
+  local ensureInstalled = {
     "css",
     "go",
     "html",
     "javascript",
     "lua",
-    "luadoc",
     "markdown",
     "markdown_inline",
-    "printf",
     "rust",
     "scss",
     "svelte",
@@ -19,25 +26,15 @@ local options = {
     "toml",
     "typescript",
     "yaml",
-  },
-
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-  },
-
-  auto_install = true,
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = nil,
-  },
-
-  indent = { enable = true },
-}
-
-M.init = function()
-  require("nvim-treesitter.configs").setup(options)
+  }
+  local alreadyInstalled = require("nvim-treesitter.config").get_installed()
+  local parsersToInstall = vim
+    .iter(ensureInstalled)
+    :filter(function(parser)
+      return not vim.tbl_contains(alreadyInstalled, parser)
+    end)
+    :totable()
+  require("nvim-treesitter").install(parsersToInstall)
 end
 
 return M

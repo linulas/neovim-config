@@ -74,6 +74,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
+    branch = "main",
     config = function()
       require("configs.treesitter").init()
     end,
