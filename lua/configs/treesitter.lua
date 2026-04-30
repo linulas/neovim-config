@@ -7,7 +7,9 @@ M.init = function()
       -- Enable treesitter highlighting and disable regex syntax
       pcall(vim.treesitter.start)
       -- Enable treesitter-based indentation
-      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      if vim.bo.filetype ~= "cs" then
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
     end,
   })
   local ensureInstalled = {
