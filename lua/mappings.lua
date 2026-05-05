@@ -11,6 +11,8 @@ map("i", "(", "()<Left>", { noremap = true, silent = true })
 map("i", '"', '""<Left>', { noremap = true, silent = true })
 map("i", "'", "''<Left>", { noremap = true, silent = true })
 
+map('n', '<leader>ra', vim.lsp.buf.rename, { desc = 'Rename' })
+
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-e>", "<End>", { desc = "move end of line" })
 map("i", "<C-h>", "<Left>", { desc = "move left" })
@@ -46,11 +48,11 @@ map("n", "<leader>fm", function()
 end, { desc = "format files" })
 
 map("n", "]d", function()
-  vim.diagnostic.goto_next { float = { border = "rounded" } }
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Next diagnostic" })
 
 map("n", "[d", function()
-  vim.diagnostic.goto_previous { float = { border = "rounded" } }
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Previous diagnostic" })
 
 -- buffer
