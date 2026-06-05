@@ -20,6 +20,7 @@ M.init = function()
     "lua",
     "markdown",
     "markdown_inline",
+    "nix",
     "rust",
     "scss",
     "svelte",
