@@ -139,10 +139,9 @@ return {
   },
 
   {
-    "phaazon/hop.nvim",
+    "smoka7/hop.nvim",
     cmd = { "HopWord", "HopChar1CurrentLine" },
     cond = vim.env.CONFIGURATION_TYPE ~= "minimal",
-    branch = "v2", -- optional but strongly recommended
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
