@@ -1,5 +1,23 @@
 local M = {}
 
+-- Reads debug settings from a neovim.json file in the project root:
+-- { "dll_path": "path/to/project.dll", "env": { "KEY": "value" } }
+local function load_project_config()
+  local path = vim.fn.getcwd() .. "/neovim.json"
+  local file = io.open(path, "r")
+  if not file then
+    return nil
+  end
+  local content = file:read "*a"
+  file:close()
+  local ok, config = pcall(vim.json.decode, content)
+  if not ok then
+    vim.notify("Failed to parse " .. path .. ": " .. config, vim.log.levels.ERROR)
+    return nil
+  end
+  return config
+end
+
 local function configure()
   -- Settings
   local dap_breakpoint = {
@@ -88,8 +106,25 @@ local function configure()
       request = "launch",
       preLaunchTask = "build",
       program = function()
-        return vim.fn.input("Path to dll", vim.fn.getcwd() .. "", "file")
+        local config = load_project_config()
+        if config and config.dll_path then
+          local dll = config.dll_path
+          if not dll:match "^/" then
+            dll = vim.fn.getcwd() .. "/" .. dll
+          end
+          if vim.fn.filereadable(dll) == 1 then
+            return dll
+          end
+          vim.notify("dll_path in neovim.json does not exist: " .. dll, vim.log.levels.WARN)
+        end
+        return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
       end,
+      stopOnEntry = true,
+      env = function()
+        local config = load_project_config()
+        return config and config.env or {}
+      end,
+      console = "integratedTerminal",
     },
   }
 
