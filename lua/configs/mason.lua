@@ -6,6 +6,7 @@ local options = {
     "eslint-lsp",
     "gopls",
     "lua-language-server",
+    "json-lsp",
     "marksman",
     "netcoredbg",
     "omnisharp",
