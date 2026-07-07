@@ -16,6 +16,7 @@ local servers = {
   "rust_analyzer",
   "svelte",
   "ts_ls",
+  "vue",
 }
 
 local function get_rust_analyzer_features()
