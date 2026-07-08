@@ -166,7 +166,18 @@ return {
       { "gb", mode = "x", desc = "comment toggle blockwise (visual)" },
     },
     config = function()
-      require("Comment").setup()
+      ---@diagnostic disable-next-line: missing-fields
+      require("Comment").setup {
+        -- Comment.nvim's treesitter integration crashes on nvim >= 0.12 when
+        -- the buffer has no parser (e.g. env files); returning a commentstring
+        -- from pre_hook skips that code path
+        pre_hook = function()
+          local ok, parser = pcall(vim.treesitter.get_parser, 0)
+          if not ok or parser == nil then
+            return vim.bo.commentstring
+          end ---@diagnostic disable-line: missing-return
+        end,
+      }
     end,
   },
 
