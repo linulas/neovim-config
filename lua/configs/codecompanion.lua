@@ -3,16 +3,25 @@ local M = {}
 local options = {
   strategies = {
     chat = {
-      adapter = "openai",
+      adapter = "claude_code",
     },
     inline = {
-      adapter = "openai",
+      adapter = "claude_code",
     },
     cmd = {
-      adapter = "openai",
+      adapter = "claude_code",
     },
   },
   adapters = {
+    acp = {
+      claude_code = function()
+        return require("codecompanion.adapters").extend("claude_code", {
+          env = {
+            CLAUDE_CODE_OAUTH_TOKEN = vim.env.CLAUDE_CODE_OAUTH_TOKEN,
+          },
+        })
+      end,
+    },
     http = {
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {

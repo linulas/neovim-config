@@ -11,7 +11,8 @@ local default_settings = {
   TYPESCRIPT_PLUGIN_PATH= "/usr/local/lib/node_modules/@vue/typescript-plugin",
   RUST_ANALYZER_FEATURES= "",
   GEMINI_API_KEY="",
-  OPENAI_API_KEY=""
+  OPENAI_API_KEY="",
+  CLAUDE_CODE_OAUTH_TOKEN=""
 }
 
 --- Parses a configuration file and sets environment varaiables accordingly.
