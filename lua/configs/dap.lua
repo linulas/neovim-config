@@ -1,7 +1,7 @@
 local M = {}
 
 -- Reads debug settings from a neovim.json file in the project root:
--- { "dll_path": "path/to/project.dll", "env": { "KEY": "value" } }
+-- { "dll_path": "path/to/project.dll", "cwd": "path/to/project", "env": { "KEY": "value" } }
 local function load_project_config()
   local path = vim.fn.getcwd() .. "/neovim.json"
   local file = io.open(path, "r")
@@ -120,6 +120,20 @@ local function configure()
         return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
       end,
       stopOnEntry = true,
+      cwd = function()
+        local config = load_project_config()
+        if config and config.cwd then
+          local dir = config.cwd
+          if not dir:match "^/" then
+            dir = vim.fn.getcwd() .. "/" .. dir
+          end
+          if vim.fn.isdirectory(dir) == 1 then
+            return dir
+          end
+          vim.notify("cwd in neovim.json does not exist: " .. dir, vim.log.levels.WARN)
+        end
+        return vim.fn.getcwd()
+      end,
       env = function()
         local config = load_project_config()
         return config and config.env or {}
