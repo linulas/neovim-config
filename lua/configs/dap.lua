@@ -18,6 +18,31 @@ local function load_project_config()
   return config
 end
 
+local function resolve_project_cwd()
+  local config = load_project_config()
+  if config and config.cwd then
+    local dir = config.cwd
+    if not dir:match "^/" then
+      dir = vim.fn.getcwd() .. "/" .. dir
+    end
+    if vim.fn.isdirectory(dir) == 1 then
+      return dir
+    end
+    vim.notify("cwd in neovim.json does not exist: " .. dir, vim.log.levels.WARN)
+  end
+  return vim.fn.getcwd()
+end
+
+-- nvim-dap ignores preLaunchTask, so run the build ourselves to avoid
+-- debugging a dll that is out of sync with the sources.
+local function build_dotnet_project(dir)
+  vim.notify("Building " .. dir .. " ...", vim.log.levels.INFO)
+  local result = vim.system({ "dotnet", "build", "--nologo", "-v", "q" }, { cwd = dir }):wait()
+  if result.code ~= 0 then
+    error("dotnet build failed:\n" .. (result.stdout or "") .. (result.stderr or ""))
+  end
+end
+
 local function configure()
   -- Settings
   local dap_breakpoint = {
@@ -104,8 +129,8 @@ local function configure()
       type = "coreclr",
       name = "launch - netcoredbg",
       request = "launch",
-      preLaunchTask = "build",
       program = function()
+        build_dotnet_project(resolve_project_cwd())
         local config = load_project_config()
         if config and config.dll_path then
           local dll = config.dll_path
@@ -119,21 +144,8 @@ local function configure()
         end
         return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
       end,
-      stopOnEntry = true,
-      cwd = function()
-        local config = load_project_config()
-        if config and config.cwd then
-          local dir = config.cwd
-          if not dir:match "^/" then
-            dir = vim.fn.getcwd() .. "/" .. dir
-          end
-          if vim.fn.isdirectory(dir) == 1 then
-            return dir
-          end
-          vim.notify("cwd in neovim.json does not exist: " .. dir, vim.log.levels.WARN)
-        end
-        return vim.fn.getcwd()
-      end,
+      stopAtEntry = false,
+      cwd = resolve_project_cwd,
       env = function()
         local config = load_project_config()
         return config and config.env or {}
