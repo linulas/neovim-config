@@ -12,7 +12,9 @@ local default_settings = {
   RUST_ANALYZER_FEATURES= "",
   GEMINI_API_KEY="",
   OPENAI_API_KEY="",
-  CLAUDE_CODE_OAUTH_TOKEN=""
+  -- Named so it is NOT picked up by claude CLIs launched from embedded terminals;
+  -- codecompanion passes it to its own claude process explicitly.
+  CODECOMPANION_CLAUDE_TOKEN=""
 }
 
 --- Parses a configuration file and sets environment varaiables accordingly.
