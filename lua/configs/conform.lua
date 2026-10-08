@@ -23,6 +23,11 @@ local options = {
       stdin = false,
     },
   },
+
+  default_format_opts = {
+    timeout_ms = 10000,
+    lsp_format = "fallback",
+  },
   -- format_on_save = {
   --   -- These options will be passed to conform.format()
   --   timeout_ms = 500,
@@ -31,6 +36,7 @@ local options = {
 }
 
 M.init = function()
+  vim.env.ESLINT_D_IDLE = vim.env.ESLINT_D_IDLE or "480"
   require("conform").setup(options)
 end
 

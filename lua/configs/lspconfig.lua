@@ -30,7 +30,7 @@ local function get_rust_analyzer_features()
   end
 end
 
-local on_attach_default = function(_, bufnr)
+local set_lsp_keymaps = function(bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
@@ -78,10 +78,17 @@ capabilities_default.textDocument.completion.completionItem = {
 }
 
 M.init = function()
+  -- set LSP keymaps for every attached server, regardless of per-server config
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
+    callback = function(args)
+      set_lsp_keymaps(args.buf)
+    end,
+  })
+
   for _, lsp in ipairs(servers) do
     if lsp == "rust_analyzer" then
       vim.lsp.config.rust_analyzer = {
-        on_attach = on_attach_default,
         capabilities = capabilities_default,
         settings = {
           ["rust-analyzer"] = {
@@ -208,7 +215,6 @@ M.init = function()
     else
       -- lsps with default config
       vim.lsp.config[lsp] = {
-        on_attach = on_attach_default,
         on_init = on_init_default,
         capabilities = capabilities_default,
       }

@@ -44,7 +44,8 @@ map("n", "<leader>gh", "<cmd>LazyGitFilterCurrentFile<cr>", { desc = "Open curre
 map("n", "<leader>gc", "<cmd>LazyGitConfig<cr>", { desc = "Open lazygit config" })
 
 map("n", "<leader>fm", function()
-  require("conform").format { lsp_fallback = true, timeout_ms = 5000 }
+  -- timeout_ms and lsp_format come from default_format_opts in configs/conform.lua
+  require("conform").format {}
 end, { desc = "format files" })
 
 map("n", "]d", function()
