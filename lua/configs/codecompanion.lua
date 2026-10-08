@@ -6,7 +6,7 @@ local options = {
       adapter = "claude_code",
     },
     inline = {
-      adapter = "claude_code",
+      adapter = "openai",
     },
     cmd = {
       adapter = "claude_code",
